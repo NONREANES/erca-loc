@@ -1,0 +1,109 @@
+// Esquema do banco de dados da ERCA LOC (PostgreSQL)
+// Depois de alterar este arquivo, crie uma migration com:  npx prisma migrate dev --name descricao
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Administradores do painel. A senha é guardada apenas como hash (bcrypt).
+model Admin {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  name           String   @default("Administrador")
+  passwordHash   String
+  /// Incrementado ao trocar a senha: invalida as sessões abertas.
+  sessionVersion Int      @default(1)
+  lastLoginAt    DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+/// Textos, contatos, WhatsApp e demais configurações editáveis (chave → valor).
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id         String      @id @default(cuid())
+  name       String
+  slug       String      @unique
+  order      Int         @default(0)
+  equipments Equipment[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Equipment {
+  id          String    @id @default(cuid())
+  name        String
+  description String    @default("")
+  /// Lista de destaques técnicos (ex.: "Intel Core i5 8ª a 13ª geração").
+  features    String[]  @default([])
+  /// Preço em centavos. Vazio = "sob consulta".
+  priceCents  Int?
+  /// Texto antes do preço, ex.: "A partir de".
+  pricePrefix String    @default("A partir de")
+  /// Texto depois do preço, ex.: "/mês".
+  priceSuffix String    @default("/mês")
+  /// Observação abaixo do preço.
+  priceNote   String    @default("")
+  ctaLabel    String    @default("Solicitar cotação")
+  /// Mensagem própria do WhatsApp (vazio = usa a mensagem padrão de equipamentos).
+  whatsappMsg String    @default("")
+  imageUrl    String    @default("")
+  featured    Boolean   @default(false)
+  active      Boolean   @default(true)
+  order       Int       @default(0)
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([active, order])
+}
+
+/// Imagens grandes do topo do site (podem ser várias, em carrossel).
+model Banner {
+  id        String   @id @default(cuid())
+  title     String   @default("")
+  subtitle  String   @default("")
+  imageUrl  String
+  active    Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// Vídeos institucionais/demonstrativos (YouTube ou Vimeo).
+model Video {
+  id        String   @id @default(cuid())
+  title     String
+  url       String
+  active    Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// Biblioteca de imagens enviadas pelo painel.
+/// storage = "cloudinary" (arquivo no Cloudinary) ou "database" (arquivo guardado no próprio Postgres).
+model Media {
+  id        String   @id @default(cuid())
+  url       String
+  storage   String
+  publicId  String?
+  filename  String   @default("")
+  mime      String
+  size      Int
+  width     Int?
+  height    Int?
+  data      Bytes?
+  createdAt DateTime @default(now())
+}
