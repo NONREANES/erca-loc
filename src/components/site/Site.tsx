@@ -62,9 +62,9 @@ export async function Site() {
         {/* ---------------- INÍCIO ---------------- */}
         <section id="inicio" className="relative overflow-hidden bg-navy pb-20 pt-32 text-white lg:pb-28 lg:pt-40">
           <div className="bg-grid absolute inset-0" aria-hidden="true" />
-          <div className="absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-turquoise/15 blur-3xl" aria-hidden="true" />
-          <div className="absolute -bottom-48 -left-40 h-[30rem] w-[30rem] rounded-full bg-sky/10 blur-3xl" aria-hidden="true" />
-          <svg className="absolute inset-0 h-full w-full opacity-30" aria-hidden="true">
+          <div className="absolute -right-52 -top-52 h-[46rem] w-[46rem] bg-[radial-gradient(closest-side,rgba(0,180,179,0.16),transparent)]" aria-hidden="true" />
+          <div className="absolute -bottom-60 -left-52 h-[40rem] w-[40rem] bg-[radial-gradient(closest-side,rgba(127,214,239,0.10),transparent)]" aria-hidden="true" />
+          <svg className="absolute inset-0 hidden h-full w-full opacity-30 md:block" aria-hidden="true">
             <line x1="-5%" y1="85%" x2="105%" y2="20%" stroke="#00B4B3" strokeWidth="1" className="pulso" />
             <line x1="-5%" y1="40%" x2="105%" y2="95%" stroke="#7fd6ef" strokeWidth="1" className="pulso" />
           </svg>
@@ -234,7 +234,7 @@ export async function Site() {
           <div className="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-2 lg:px-8">
             <article id="inventario" className="revelar relative overflow-hidden rounded-[2rem] bg-navy p-9 text-white sm:p-12">
               <div className="bg-grid absolute inset-0" aria-hidden="true" />
-              <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-turquoise/20 blur-3xl" aria-hidden="true" />
+              <div className="absolute -bottom-40 -right-40 h-[28rem] w-[28rem] bg-[radial-gradient(closest-side,rgba(0,180,179,0.22),transparent)]" aria-hidden="true" />
               <div className="relative">
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-turquoise/15 text-turquoise">
                   <IconShield className="h-7 w-7" />

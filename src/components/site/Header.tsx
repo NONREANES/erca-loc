@@ -41,7 +41,7 @@ export function Header({ whatsapp, logoUrl, cta }: { whatsapp: string; logoUrl?:
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        rolou || aberto ? "bg-navy/95 shadow-lg shadow-navy-900/20 backdrop-blur-md" : "bg-transparent"
+        rolou || aberto ? "bg-navy/[0.97] shadow-lg shadow-navy-900/20" : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">

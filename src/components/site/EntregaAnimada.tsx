@@ -5,7 +5,7 @@
 export function EntregaAnimada() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[460px]" aria-hidden="true">
-      <div className="absolute inset-[12%] rounded-full bg-gradient-to-br from-[#2EC4E6]/25 via-[#1E5FD8]/10 to-[#F7A21B]/20 blur-2xl" />
+      <div className="absolute inset-[4%] bg-[radial-gradient(closest-side,rgba(46,196,230,0.18),rgba(247,162,27,0.06)_70%,transparent)]" />
       <div className="absolute inset-[6%] rounded-full border border-dashed border-navy/10" />
 
       <svg viewBox="0 0 400 400" className="relative h-full w-full">

@@ -9,7 +9,7 @@ export default function LoginPage() {
   return (
     <main className="relative grid min-h-screen place-items-center overflow-hidden bg-navy px-5 py-12">
       <div className="bg-grid absolute inset-0" aria-hidden="true" />
-      <div className="absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-turquoise/15 blur-3xl" aria-hidden="true" />
+      <div className="absolute -right-52 -top-52 h-[40rem] w-[40rem] bg-[radial-gradient(closest-side,rgba(0,180,179,0.16),transparent)]" aria-hidden="true" />
       <div className="relative w-full max-w-md">
         <div className="mb-8 flex flex-col items-center text-center">
           <Logo className="h-14 w-auto" />

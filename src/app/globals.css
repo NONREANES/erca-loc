@@ -162,7 +162,12 @@ html.intro-vista .splash {
 /* Pulso das linhas de conexão no fundo */
 .pulso {
   stroke-dasharray: 6 14;
-  animation: fluxo 6s linear infinite;
+}
+/* As linhas "em movimento" só animam em telas grandes com mouse (no celular custariam redesenhar a tela toda) */
+@media (hover: hover) and (min-width: 768px) {
+  .pulso {
+    animation: fluxo 6s linear infinite;
+  }
 }
 @keyframes fluxo {
   to {
@@ -191,7 +196,17 @@ html.intro-vista .splash {
 .camada {
   transform: translate3d(calc(var(--mx) * var(--d) * 1px), calc(var(--my) * var(--d) * 1px), 0)
     rotateY(calc(var(--mx) * 3deg)) rotateX(calc(var(--my) * -3deg));
-  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .camada {
+    will-change: transform;
+  }
+}
+/* Fora da tela, a cena para de animar (economiza bateria e processamento) */
+.cena.pausada .flutuar,
+.cena.pausada .msg-zap,
+.cena.pausada .linha-inv {
+  animation-play-state: paused;
 }
 .msg-zap {
   opacity: 0;
@@ -265,12 +280,10 @@ html.intro-vista .splash {
 
 /* Produto flutuando no card de equipamento */
 .produto-img {
-  transition: transform 0.7s var(--ease-out-expo), filter 0.7s;
-  filter: drop-shadow(0 18px 18px rgba(11, 35, 64, 0.18));
+  transition: transform 0.7s var(--ease-out-expo);
 }
 .group:hover .produto-img {
   transform: translateY(-10px) scale(1.04);
-  filter: drop-shadow(0 30px 24px rgba(11, 35, 64, 0.25));
 }
 .sombra-chao {
   transition: transform 0.7s var(--ease-out-expo), opacity 0.7s;

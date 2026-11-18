@@ -18,30 +18,48 @@ export function HeroScene({ banners, preco, slogan }: { banners: Banner[]; preco
 
   useEffect(() => {
     const el = cena.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el) return;
+
+    // Fora da tela: pausa as animações da cena
+    const visivel = new IntersectionObserver(([e]) => el.classList.toggle("pausada", !e.isIntersecting), { threshold: 0 });
+    visivel.observe(el);
+
+    // Efeito de profundidade só em computador (mouse). No celular não há o que seguir.
+    const comMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!comMouse || reduzido) return () => visivel.disconnect();
+
     let raf = 0;
     const alvo = { x: 0, y: 0 };
     const atual = { x: 0, y: 0 };
-    const mover = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      alvo.x = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width) * 2 - 1));
-      alvo.y = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height) * 2 - 1));
-    };
-    const sair = () => {
-      alvo.x = 0;
-      alvo.y = 0;
-    };
     const passo = () => {
       atual.x += (alvo.x - atual.x) * 0.08;
       atual.y += (alvo.y - atual.y) * 0.08;
       el.style.setProperty("--mx", atual.x.toFixed(3));
       el.style.setProperty("--my", atual.y.toFixed(3));
-      raf = requestAnimationFrame(passo);
+      // Chegou ao destino: para de calcular até o mouse mexer de novo
+      if (Math.abs(alvo.x - atual.x) < 0.002 && Math.abs(alvo.y - atual.y) < 0.002) raf = 0;
+      else raf = requestAnimationFrame(passo);
+    };
+    const iniciar = () => {
+      if (!raf) raf = requestAnimationFrame(passo);
+    };
+    const mover = (e: PointerEvent) => {
+      if (el.classList.contains("pausada")) return;
+      const r = el.getBoundingClientRect();
+      alvo.x = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width) * 2 - 1));
+      alvo.y = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height) * 2 - 1));
+      iniciar();
+    };
+    const sair = () => {
+      alvo.x = 0;
+      alvo.y = 0;
+      iniciar();
     };
     window.addEventListener("pointermove", mover, { passive: true });
     document.addEventListener("pointerleave", sair);
-    raf = requestAnimationFrame(passo);
     return () => {
+      visivel.disconnect();
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", mover);
       document.removeEventListener("pointerleave", sair);
@@ -51,8 +69,8 @@ export function HeroScene({ banners, preco, slogan }: { banners: Banner[]; preco
   return (
     <div ref={cena} className="cena relative mx-auto aspect-[1/0.9] w-full max-w-[680px] select-none" aria-hidden="true">
       {/* brilhos de fundo */}
-      <div className="absolute left-[10%] top-[8%] h-[55%] w-[60%] rounded-full bg-[#2EC4E6]/20 blur-3xl" />
-      <div className="absolute bottom-[6%] right-[4%] h-[40%] w-[45%] rounded-full bg-[#F7A21B]/10 blur-3xl" />
+      <div className="absolute left-[2%] top-[0%] h-[70%] w-[76%] bg-[radial-gradient(closest-side,rgba(46,196,230,0.22),transparent)]" />
+      <div className="absolute bottom-[0%] right-[0%] h-[55%] w-[60%] bg-[radial-gradient(closest-side,rgba(247,162,27,0.12),transparent)]" />
 
       {/* MONITOR (fundo) */}
       <Camada profundidade={10} className="left-0 top-[5%] w-[76%]" atraso="0s">
@@ -82,7 +100,7 @@ export function HeroScene({ banners, preco, slogan }: { banners: Banner[]; preco
       </Camada>
       {preco && (
         <Camada profundidade={44} className="right-[-2%] top-[23%] hidden sm:block" atraso="-5s">
-          <div className="rounded-2xl border border-white/15 bg-white/95 px-3.5 py-2 text-left shadow-2xl shadow-navy-900/40 backdrop-blur">
+          <div className="rounded-2xl border border-white/15 bg-white/95 px-3.5 py-2 text-left shadow-2xl shadow-navy-900/40">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-slate">Notebook Dell i5</p>
             <p className="font-display text-sm font-extrabold text-navy">
               a partir de <span className="text-turquoise-600">{preco}</span>
