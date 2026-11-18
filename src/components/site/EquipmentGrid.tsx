@@ -64,13 +64,14 @@ export function EquipmentGrid({ items, categories }: { items: EquipCard[]; categ
                 Destaque
               </span>
             )}
-            <div className="relative aspect-[4/3] overflow-hidden border-b border-navy/5 bg-white">
+            <div className="relative aspect-[4/3] overflow-hidden bg-[radial-gradient(80%_70%_at_50%_45%,#ffffff_0%,#eef4f8_60%,#e2ebf2_100%)]">
+              <div className="sombra-chao absolute bottom-[9%] left-1/2 h-[7%] w-[62%] -translate-x-1/2 rounded-[50%] bg-navy/15 blur-md" aria-hidden="true" />
               {e.imageUrl ? (
                 <img
                   src={e.imageUrl}
                   alt={e.name}
                   loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  className="produto-img absolute inset-0 m-auto h-[82%] w-[86%] object-contain"
                 />
               ) : (
                 <div className="grid h-full place-items-center text-sm text-slate">Imagem em breve</div>

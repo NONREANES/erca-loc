@@ -1,6 +1,6 @@
 import { connection } from "next/server";
 import { getSiteData } from "@/lib/data";
-import { fillTemplate, lines, paragraphs, whatsappLink } from "@/lib/format";
+import { fillTemplate, formatBRL, lines, paragraphs, whatsappLink } from "@/lib/format";
 import { Logo, LogoSymbol } from "../Logo";
 import {
   IconArrow,
@@ -18,7 +18,8 @@ import {
   IconTool,
   IconWhatsApp,
 } from "../icons";
-import { BannerCarousel } from "./BannerCarousel";
+import { HeroScene } from "./HeroScene";
+import { EntregaAnimada } from "./EntregaAnimada";
 import { EquipmentGrid } from "./EquipmentGrid";
 import { Header } from "./Header";
 import { RevealOnScroll } from "./Reveal";
@@ -38,6 +39,13 @@ export async function Site() {
     ...e,
     waLink: wa(e.whatsappMsg || fillTemplate(s.msg_equipment, { equipamento: e.name })),
   }));
+
+  const comPreco = equipments.find((e) => e.featured && e.priceCents != null) ?? equipments.find((e) => e.priceCents != null);
+  const preco = comPreco ? formatBRL(comPreco.priceCents) : "";
+  const etapas = lines(s.how_steps).map((l) => {
+    const [titulo, ...resto] = l.split("|");
+    return { titulo: titulo.trim(), texto: resto.join("|").trim() };
+  });
 
   const stats = [1, 2, 3]
     .map((n) => ({ valor: s[`stat${n}_value`], texto: s[`stat${n}_label`] }))
@@ -61,7 +69,7 @@ export async function Site() {
             <line x1="-5%" y1="40%" x2="105%" y2="95%" stroke="#7fd6ef" strokeWidth="1" className="pulso" />
           </svg>
 
-          <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[1.05fr_1fr] lg:px-8">
+          <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[1fr_1.1fr] lg:px-8">
             <div className="revelar">
               {s.hero_eyebrow && (
                 <span className="inline-flex items-center gap-2 rounded-full border border-turquoise/30 bg-turquoise/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-sky">
@@ -100,8 +108,8 @@ export async function Site() {
               )}
             </div>
 
-            <div className="revelar lg:pl-6" style={{ transitionDelay: "150ms" }}>
-              <BannerCarousel banners={banners} />
+            <div className="revelar" style={{ transitionDelay: "150ms" }}>
+              <HeroScene banners={banners} preco={preco} slogan={s.slogan} />
             </div>
           </div>
         </section>
@@ -114,7 +122,7 @@ export async function Site() {
                 <div className="bg-grid absolute inset-0" aria-hidden="true" />
                 <LogoSymbol className="absolute -right-10 -top-10 h-56 w-56 opacity-10" />
                 <div className="relative">
-                  <Logo className="text-2xl" src={s.logo_url || undefined} />
+                  <Logo className="h-11 w-auto" src={s.logo_url || undefined} />
                   <p className="mt-2 font-display text-xs font-semibold uppercase tracking-[0.3em] text-sky/80">{s.tagline}</p>
                   <div className="mt-10 grid grid-cols-2 gap-4">
                     {[
@@ -179,8 +187,50 @@ export async function Site() {
           </div>
         </section>
 
+        {/* ---------------- COMO FUNCIONA ---------------- */}
+        {etapas.length > 0 && (
+          <section id="como-funciona" className="relative overflow-hidden py-24 lg:py-32">
+            <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+              <div className="revelar">
+                <EntregaAnimada />
+              </div>
+              <div className="revelar">
+                <span className="text-sm font-bold uppercase tracking-[0.2em] text-turquoise-600">Como funciona</span>
+                <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-navy sm:text-4xl">{s.how_title}</h2>
+                {s.how_text && <p className="mt-4 text-lg text-slate">{s.how_text}</p>}
+                <ol className="relative mt-10 space-y-8">
+                  <span className="absolute bottom-6 left-[23px] top-6 w-0.5 bg-mist" aria-hidden="true">
+                    <span className="trilha-fill block h-full w-full origin-top bg-gradient-to-b from-[#F7A21B] via-[#2EC4E6] to-[#1E5FD8]" style={{ transformOrigin: "top" }} />
+                  </span>
+                  {etapas.map((e, k) => (
+                    <li key={e.titulo + k} className="relative flex gap-5">
+                      <span
+                        className="passo-icone relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-navy font-display text-lg font-extrabold text-white shadow-lg shadow-navy/20"
+                        style={{ transitionDelay: `${0.3 + k * 0.25}s` }}
+                      >
+                        {k + 1}
+                      </span>
+                      <div className="pt-1">
+                        <h3 className="font-display text-lg font-bold text-navy">{e.titulo}</h3>
+                        {e.texto && <p className="mt-1 text-slate">{e.texto}</p>}
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+                <a
+                  href={waGeral}
+                  {...ext(waGeral)}
+                  className="mt-10 inline-flex items-center gap-2.5 rounded-full bg-turquoise px-7 py-3.5 font-semibold text-white shadow-xl shadow-turquoise/25 transition hover:-translate-y-0.5 hover:bg-turquoise-600"
+                >
+                  <IconWhatsApp className="h-5 w-5" /> {s.hero_cta}
+                </a>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* ---------------- INVENTÁRIO + SUPORTE ---------------- */}
-        <section className="py-24 lg:py-32">
+        <section className="pb-24 lg:pb-32">
           <div className="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-2 lg:px-8">
             <article id="inventario" className="revelar relative overflow-hidden rounded-[2rem] bg-navy p-9 text-white sm:p-12">
               <div className="bg-grid absolute inset-0" aria-hidden="true" />
@@ -311,7 +361,7 @@ export async function Site() {
       <footer className="bg-navy-900 text-white/60">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 py-10 sm:flex-row lg:px-8">
           <div className="text-center sm:text-left">
-            <Logo className="text-xl" src={s.logo_url || undefined} />
+            <Logo className="mx-auto h-9 w-auto sm:mx-0" src={s.logo_url || undefined} />
             <p className="mt-2 text-xs uppercase tracking-[0.25em] text-sky/60">{s.tagline}</p>
           </div>
           <div className="flex items-center gap-3">

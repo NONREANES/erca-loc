@@ -75,15 +75,32 @@ html.intro-vista .splash {
     stroke-dashoffset: 0;
   }
 }
-.splash-texto {
+.splash-simbolo {
+  animation: sumir 0.6s ease 1.25s forwards;
+}
+.splash-logo {
   opacity: 0;
-  transform: translateY(14px);
-  animation: subir 0.9s var(--ease-out-expo) 0.9s forwards;
+  transform: scale(0.9);
+  filter: blur(6px);
+  animation: surgir 0.9s var(--ease-out-expo) 1.3s forwards;
+}
+@keyframes sumir {
+  to {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+@keyframes surgir {
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }
 .splash-tag {
   opacity: 0;
   letter-spacing: 0.6em;
-  animation: tag 1.2s var(--ease-out-expo) 1.3s forwards;
+  animation: tag 1.2s var(--ease-out-expo) 1.7s forwards;
 }
 .splash-barra {
   transform-origin: left;
@@ -141,6 +158,103 @@ html.intro-vista .splash {
   transform: none;
 }
 
+/* ---------- Cena interativa do topo ---------- */
+.cena {
+  --mx: 0;
+  --my: 0;
+}
+.camada {
+  transform: translate3d(calc(var(--mx) * var(--d) * 1px), calc(var(--my) * var(--d) * 1px), 0)
+    rotateY(calc(var(--mx) * 3deg)) rotateX(calc(var(--my) * -3deg));
+  will-change: transform;
+}
+.msg-zap {
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  animation: msg 0.5s var(--ease-out-expo) forwards;
+}
+@keyframes msg {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.linha-inv {
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: msg 0.6s var(--ease-out-expo) forwards;
+}
+
+/* Linha do "Como funciona" que se preenche ao aparecer */
+.trilha-fill {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.8s var(--ease-out-expo) 0.2s;
+}
+.visivel .trilha-fill {
+  transform: scaleY(1);
+}
+.passo-icone {
+  transform: scale(0.6);
+  opacity: 0;
+  transition:
+    transform 0.6s var(--ease-out-expo),
+    opacity 0.6s ease;
+}
+.visivel .passo-icone {
+  transform: none;
+  opacity: 1;
+}
+
+/* Caixa de entrega animada */
+.caixa-tampa,
+.caixa-tampa-d {
+  transform-box: fill-box;
+  animation: tampa 5s ease-in-out infinite;
+}
+.caixa-tampa {
+  transform-origin: 0% 100%;
+}
+.caixa-tampa-d {
+  transform-origin: 100% 100%;
+  animation-name: tampa-d;
+}
+@keyframes tampa-d {
+  0%, 15% { transform: rotate(0); }
+  30%, 80% { transform: rotate(150deg); }
+  95%, 100% { transform: rotate(0); }
+}
+.caixa-note {
+  animation: subirnote 5s var(--ease-out-expo) infinite;
+}
+@keyframes tampa {
+  0%, 15% { transform: rotate(0); }
+  30%, 80% { transform: rotate(-150deg); }
+  95%, 100% { transform: rotate(0); }
+}
+@keyframes subirnote {
+  0%, 22% { transform: translateY(70px); opacity: 0; }
+  40%, 78% { transform: translateY(0); opacity: 1; }
+  92%, 100% { transform: translateY(70px); opacity: 0; }
+}
+
+/* Produto flutuando no card de equipamento */
+.produto-img {
+  transition: transform 0.7s var(--ease-out-expo), filter 0.7s;
+  filter: drop-shadow(0 18px 18px rgba(11, 35, 64, 0.18));
+}
+.group:hover .produto-img {
+  transform: translateY(-10px) scale(1.04);
+  filter: drop-shadow(0 30px 24px rgba(11, 35, 64, 0.25));
+}
+.sombra-chao {
+  transition: transform 0.7s var(--ease-out-expo), opacity 0.7s;
+}
+.group:hover .sombra-chao {
+  transform: scaleX(0.8);
+  opacity: 0.5;
+}
+
 /* Flutuar suave (imagem do topo) */
 .flutuar {
   animation: flutuar 7s ease-in-out infinite;
@@ -160,7 +274,8 @@ html.intro-vista .splash {
     scroll-behavior: auto;
   }
   .logo-draw path,
-  .splash-texto,
+  .splash-simbolo,
+  .splash-logo,
   .splash-tag,
   .splash-barra,
   .splash-pular {
@@ -173,7 +288,28 @@ html.intro-vista .splash {
     transition: none;
   }
   .flutuar,
-  .pulso {
+  .pulso,
+  .caixa-tampa,
+  .caixa-tampa-d,
+  .caixa-note {
     animation: none;
+  }
+  .caixa-note {
+    opacity: 1;
+  }
+  .msg-zap,
+  .linha-inv {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .camada {
+    transform: none;
+  }
+  .trilha-fill,
+  .passo-icone {
+    transition: none;
+    transform: none;
+    opacity: 1;
   }
 }

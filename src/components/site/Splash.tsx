@@ -1,16 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { LogoSymbol } from "../Logo";
+/* eslint-disable @next/next/no-img-element */
+import { LOGO_PADRAO, LogoSymbol } from "../Logo";
 
 const CHAVE = "erca_intro_vista";
-const DURACAO = 2900; // tempo total da abertura antes de revelar o site
+const DURACAO = 3400; // tempo total da abertura antes de revelar o site
 
 /**
  * Abertura animada: desenha o símbolo, mostra ERCA LOC e a assinatura,
  * e então "sobe" revelando o site. Aparece uma vez por sessão do navegador.
  */
-export function Splash() {
+export function Splash({ logoUrl }: { logoUrl?: string }) {
   const [saindo, setSaindo] = useState(false);
   const [fim, setFim] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -56,15 +57,15 @@ export function Splash() {
       </svg>
 
       <div className="relative flex flex-col items-center px-6 text-center">
-        <LogoSymbol animated className="h-28 w-28 drop-shadow-[0_0_40px_rgba(0,180,179,0.35)] sm:h-36 sm:w-36" />
-        <div className="splash-texto mt-6 font-display text-5xl font-extrabold italic tracking-wide sm:text-7xl">
-          <span className="text-white">ERCA</span> <span className="text-turquoise">LOC</span>
+        <div className="relative grid h-36 w-[min(86vw,560px)] place-items-center sm:h-44">
+          <LogoSymbol animated className="splash-simbolo absolute h-28 w-28 drop-shadow-[0_0_40px_rgba(46,196,230,0.35)] sm:h-36 sm:w-36" />
+          <img src={logoUrl || LOGO_PADRAO} alt="ERCA LOC" width={701} height={201} className="splash-logo absolute w-full" />
         </div>
         <div className="splash-tag mt-4 font-display text-xs font-semibold uppercase text-sky sm:text-sm">
           Locação de tecnologia
         </div>
         <div className="mt-10 h-[2px] w-48 overflow-hidden rounded bg-white/10">
-          <div className="splash-barra h-full w-full bg-gradient-to-r from-sky to-turquoise" />
+          <div className="splash-barra h-full w-full bg-gradient-to-r from-[#F7A21B] via-[#9BCB3C] to-[#3FD0EE]" />
         </div>
       </div>
 

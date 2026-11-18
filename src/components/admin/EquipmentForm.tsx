@@ -64,7 +64,7 @@ export function EquipmentForm({ equip, categorias }: { equip?: Equip; categorias
           <Field label="Destaques técnicos" help="Um por linha (até 8). Aparecem com ✓ no card." htmlFor="features">
             <textarea id="features" name="features" rows={4} defaultValue={e?.features.join("\n")} className={inputCls} />
           </Field>
-          <ImageField name="imageUrl" label="Foto do equipamento" defaultValue={e?.imageUrl} help="Ideal: foto em formato 4:3 (ex.: 1200×900), fundo claro." />
+          <ImageField name="imageUrl" label="Foto do equipamento" defaultValue={e?.imageUrl} help="Ideal: foto em PNG ou WEBP sem fundo (transparente), assim o aparelho aparece flutuando no site. Fotos com fundo branco também funcionam." />
         </div>
       </div>
 

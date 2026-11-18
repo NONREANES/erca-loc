@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   description:
     "Locação de notebooks, monitores, celulares e impressoras para empresas, com gestão de inventário e suporte técnico.",
-  icons: { icon: "/icon.svg" },
+  icons: { icon: "/brand/simbolo.png", apple: "/brand/simbolo.png" },
 };
 
 export const viewport: Viewport = {

@@ -37,7 +37,7 @@ async function executar() {
 }
 
 async function semearConteudo() {
-  const [equipCount, bannerCount] = await Promise.all([db.equipment.count(), db.banner.count()]);
+  const equipCount = await db.equipment.count();
 
   if (equipCount === 0) {
     const cats = [
@@ -100,16 +100,7 @@ async function semearConteudo() {
     });
   }
 
-  if (bannerCount === 0) {
-    await db.banner.create({
-      data: {
-        title: "Notebooks Dell para a sua equipe",
-        subtitle: "Intel Core i5 · a partir de R$ 249,90/mês",
-        imageUrl: "/seed/notebooks.webp",
-        order: 1,
-      },
-    });
-  }
+  // Banners são opcionais: sem nenhum, o monitor do topo mostra o papel de parede da marca.
 }
 
 async function criarPrimeiroAdmin() {

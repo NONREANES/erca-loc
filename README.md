@@ -14,8 +14,10 @@ Site da **ERCA LOC | Locação de Tecnologia**, com abertura animada da marca, v
 
 ## O que o site tem
 
-- **Abertura animada**: a logo é desenhada na tela e revela o site. Aparece uma vez por visita, tem botão "Pular" e pode ser desligada no painel.
-- **Seções**: Início (com banners), Quem somos, Equipamentos (filtro por categoria), Gestão de inventário, Suporte técnico, Vídeos e Contato.
+- **Abertura animada**: o símbolo é desenhado e se transforma na logo oficial antes de revelar o site. Aparece uma vez por visita, tem botão "Pular" e pode ser desligada no painel.
+- **Cena interativa no topo**: monitor, notebook e celular flutuando sem fundo e reagindo ao mouse. O monitor mostra os banners do painel, o notebook mostra o inventário e o celular mostra uma conversa de WhatsApp.
+- **Como funciona**: caixa da ERCA LOC abrindo com o notebook subindo, mais as etapas da locação (editáveis).
+- **Seções**: Início, Quem somos, Equipamentos (filtro por categoria e fotos sem fundo flutuando), Como funciona, Gestão de inventário, Suporte técnico, Vídeos e Contato.
 - **WhatsApp**: cada botão abre o WhatsApp com uma mensagem pronta, inclusive com o nome do equipamento escolhido. Também há um botão flutuante.
 - **Preços**: o valor aparece como "A partir de R$ 249,90/mês", com observação. Sem valor cadastrado, o card mostra "Sob consulta".
 
@@ -23,7 +25,8 @@ Site da **ERCA LOC | Locação de Tecnologia**, com abertura animada da marca, v
 
 - Editar títulos, textos, destaques, dados de contato e redes sociais.
 - Cadastrar, editar, ordenar, ocultar e excluir equipamentos, com preço, foto e categoria.
-- Gerenciar categorias, banners do topo (vários, em carrossel) e vídeos do YouTube ou Vimeo.
+- Gerenciar categorias, banners (exibidos na tela do monitor do topo) e vídeos do YouTube ou Vimeo.
+- Dica: envie as fotos dos equipamentos em PNG ou WEBP **sem fundo**, para que flutuem no site.
 - Enviar imagens e usar a biblioteca de imagens. A logo oficial também pode ser enviada.
 - Alterar o número do WhatsApp e as mensagens prontas.
 - Trocar o próprio e-mail e a senha, e sair da sessão.

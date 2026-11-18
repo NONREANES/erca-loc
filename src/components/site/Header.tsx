@@ -8,6 +8,7 @@ const LINKS = [
   { href: "#inicio", label: "Início" },
   { href: "#quem-somos", label: "Quem somos" },
   { href: "#equipamentos", label: "Equipamentos" },
+  { href: "#como-funciona", label: "Como funciona" },
   { href: "#inventario", label: "Inventário" },
   { href: "#suporte", label: "Suporte" },
   { href: "#contato", label: "Contato" },
@@ -44,8 +45,8 @@ export function Header({ whatsapp, logoUrl, cta }: { whatsapp: string; logoUrl?:
       }`}
     >
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
-        <a href="#inicio" className="text-[22px]" onClick={() => setAberto(false)} aria-label="ERCA LOC — início">
-          <Logo src={logoUrl || undefined} className={logoUrl ? "h-10 w-auto" : undefined} />
+        <a href="#inicio" onClick={() => setAberto(false)} aria-label="ERCA LOC — início">
+          <Logo src={logoUrl || undefined} className="h-9 w-auto sm:h-10" />
         </a>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
@@ -53,7 +54,7 @@ export function Header({ whatsapp, logoUrl, cta }: { whatsapp: string; logoUrl?:
             <a
               key={l.href}
               href={l.href}
-              className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition ${
+              className={`relative rounded-full px-3 py-2 text-sm font-medium transition xl:px-3.5 ${
                 ativo === l.href ? "text-white" : "text-white/70 hover:text-white"
               }`}
             >

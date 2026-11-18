@@ -9,13 +9,13 @@ export default async function BannersPage() {
   const banners = await db.banner.findMany({ orderBy: [{ order: "asc" }, { createdAt: "asc" }] });
   return (
     <div className="max-w-4xl">
-      <h1 className="font-display text-3xl font-extrabold text-navy">Banners do topo</h1>
-      <p className="mt-1 text-slate">Imagens grandes ao lado do título principal. Com mais de uma ativa, o site alterna entre elas sozinho.</p>
+      <h1 className="font-display text-3xl font-extrabold text-navy">Banners (tela do monitor)</h1>
+      <p className="mt-1 text-slate">Imagens exibidas na tela do monitor da cena animada, no topo do site. Com mais de uma ativa, elas se alternam sozinhas. Sem nenhuma, aparece o papel de parede da marca.</p>
 
       <details className="mt-6 rounded-2xl border border-navy/8 bg-white p-6 open:shadow-sm">
         <summary className="cursor-pointer font-display text-lg font-bold text-navy">+ Adicionar banner</summary>
         <ActionForm action={salvarBanner} submitLabel="Adicionar banner" className="mt-5">
-          <ImageField name="imageUrl" label="Imagem" help="Ideal: 1600×1200 (formato 4:3)." />
+          <ImageField name="imageUrl" label="Imagem" help="Ideal: formato de tela 16:9 (ex.: 1600×900)." />
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Título (opcional)"><input name="title" maxLength={120} className={inputCls} /></Field>
             <Field label="Subtítulo (opcional)"><input name="subtitle" maxLength={200} className={inputCls} /></Field>
@@ -25,7 +25,7 @@ export default async function BannersPage() {
       </details>
 
       <ul className="mt-6 space-y-4">
-        {banners.length === 0 && <li className="rounded-2xl border border-dashed border-navy/20 bg-white p-10 text-center text-slate">Nenhum banner. O topo do site fica só com o texto.</li>}
+        {banners.length === 0 && <li className="rounded-2xl border border-dashed border-navy/20 bg-white p-10 text-center text-slate">Nenhum banner. O monitor do topo mostra o papel de parede da marca.</li>}
         {banners.map((b, i) => (
           <li key={b.id} className={`rounded-2xl border bg-white p-6 ${b.active ? "border-navy/8" : "border-dashed border-navy/20"}`}>
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">

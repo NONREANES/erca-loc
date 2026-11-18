@@ -113,6 +113,28 @@ export const SETTING_GROUPS: SettingGroup[] = [
     ],
   },
   {
+    id: "como",
+    title: "Como funciona",
+    description: "Etapas da locação, mostradas com animação no site.",
+    fields: [
+      { key: "how_title", label: "Título", value: "Da escolha à entrega, sem dor de cabeça" },
+      {
+        key: "how_text",
+        label: "Texto",
+        type: "textarea",
+        value: "Você fala com a gente pelo WhatsApp e recebe os equipamentos prontos para a equipe trabalhar.",
+      },
+      {
+        key: "how_steps",
+        label: "Etapas (uma por linha, no formato: Título | descrição)",
+        type: "lines",
+        value:
+          "Você escolhe | Conte quais equipamentos e quantos precisa. Montamos a proposta pelo WhatsApp.\nPreparamos | Equipamentos revisados, configurados e identificados no inventário.\nEntregamos | Levamos até a sua empresa, prontos para a equipe começar a usar.\nAcompanhamos | Suporte técnico e trocas durante todo o contrato.",
+        help: "Use o caractere | para separar o título da descrição. Recomendado: 3 ou 4 etapas.",
+      },
+    ],
+  },
+  {
     id: "inventario",
     title: "Gestão de inventário",
     fields: [

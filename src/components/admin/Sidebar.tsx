@@ -12,7 +12,7 @@ const ITENS = [
   { href: "/admin/equipamentos", label: "Equipamentos e preços" },
   { href: "/admin/categorias", label: "Categorias" },
   { href: "/admin/textos", label: "Textos, contato e WhatsApp" },
-  { href: "/admin/banners", label: "Banners do topo" },
+  { href: "/admin/banners", label: "Banners (tela do monitor)" },
   { href: "/admin/videos", label: "Vídeos" },
   { href: "/admin/imagens", label: "Biblioteca de imagens" },
   { href: "/admin/conta", label: "Minha conta e senha" },
