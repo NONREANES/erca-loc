@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { logout } from "@/app/admin/actions";
-import { LogoSymbol } from "../Logo";
+import { Logo } from "../Logo";
 import { IconClose, IconMenu } from "../icons";
 
 const ITENS = [
@@ -27,10 +27,7 @@ export function Sidebar({ nome, email, cloudinary }: { nome: string; email: stri
     <aside className="bg-navy text-white lg:sticky lg:top-0 lg:h-screen">
       <div className="flex items-center justify-between px-5 py-5 lg:block">
         <Link href="/admin" className="flex items-center gap-2.5">
-          <LogoSymbol className="h-9 w-9" />
-          <span className="font-display text-lg font-extrabold italic">
-            ERCA <span className="text-turquoise">LOC</span>
-          </span>
+          <Logo className="h-8 w-auto" />
         </Link>
         <button type="button" className="rounded-lg p-2 hover:bg-white/10 lg:hidden" onClick={() => setAberto((v) => !v)} aria-label="Menu" aria-expanded={aberto}>
           {aberto ? <IconClose className="h-6 w-6" /> : <IconMenu className="h-6 w-6" />}

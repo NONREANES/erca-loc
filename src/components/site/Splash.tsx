@@ -57,9 +57,10 @@ export function Splash({ logoUrl }: { logoUrl?: string }) {
       </svg>
 
       <div className="relative flex flex-col items-center px-6 text-center">
-        <div className="relative grid h-36 w-[min(86vw,560px)] place-items-center sm:h-44">
-          <LogoSymbol animated className="splash-simbolo absolute h-28 w-28 drop-shadow-[0_0_40px_rgba(46,196,230,0.35)] sm:h-36 sm:w-36" />
-          <img src={logoUrl || LOGO_PADRAO} alt="ERCA LOC" width={701} height={201} className="splash-logo absolute w-full" />
+        {/* O símbolo entra girando no centro e desliza até o seu lugar na logo; o texto se revela ao lado */}
+        <div className="relative aspect-[701/201] w-[min(86vw,560px)]">
+          <img src={logoUrl || LOGO_PADRAO} alt="ERCA LOC" width={701} height={201} className="splash-logo absolute inset-0 h-full w-full" />
+          <LogoSymbol animated className="splash-simbolo absolute left-[37.6%] top-0 h-full w-auto drop-shadow-[0_0_36px_rgba(46,196,230,0.45)]" />
         </div>
         <div className="splash-tag mt-4 font-display text-xs font-semibold uppercase text-sky sm:text-sm">
           Locação de tecnologia

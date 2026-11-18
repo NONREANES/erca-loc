@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "./LoginForm";
-import { LogoSymbol } from "@/components/Logo";
+import { Logo } from "@/components/Logo";
 
 export const metadata: Metadata = { title: "Entrar no painel", robots: { index: false, follow: false } };
 
@@ -12,10 +12,7 @@ export default function LoginPage() {
       <div className="absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-turquoise/15 blur-3xl" aria-hidden="true" />
       <div className="relative w-full max-w-md">
         <div className="mb-8 flex flex-col items-center text-center">
-          <LogoSymbol className="h-16 w-16" />
-          <p className="mt-4 font-display text-3xl font-extrabold italic">
-            <span className="text-white">ERCA</span> <span className="text-turquoise">LOC</span>
-          </p>
+          <Logo className="h-14 w-auto" />
           <p className="mt-1 text-sm text-sky/80">Painel administrativo</p>
         </div>
         <div className="rounded-3xl bg-white p-8 shadow-2xl shadow-navy-900/50">

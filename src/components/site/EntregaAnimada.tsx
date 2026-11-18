@@ -27,15 +27,6 @@ export function EntregaAnimada() {
             <stop offset="0" stopColor="#e6e9ed" />
             <stop offset="1" stopColor="#9aa3ad" />
           </linearGradient>
-          <linearGradient id="ea-a" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0" stopColor="#E8452C" />
-            <stop offset=".5" stopColor="#F7A21B" />
-            <stop offset="1" stopColor="#9BCB3C" />
-          </linearGradient>
-          <linearGradient id="ea-b" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0" stopColor="#1E5FD8" />
-            <stop offset="1" stopColor="#3FD0EE" />
-          </linearGradient>
         </defs>
 
         {/* sombra no chão */}
@@ -48,11 +39,7 @@ export function EntregaAnimada() {
         <g className="caixa-note">
           <rect x="128" y="88" width="144" height="94" rx="8" fill="#1a1f26" />
           <rect x="135" y="95" width="130" height="80" rx="3" fill="url(#ea-tela)" />
-          <g transform="translate(183 112) scale(.34)" fill="none" strokeWidth="11" strokeLinejoin="round">
-            <path d="M74 22 L50 8 L13 29 L13 71 L26 78.5" stroke="url(#ea-a)" />
-            <path d="M26 78 L50 92 L87 71 L87 29 L80 25" stroke="url(#ea-b)" />
-            <path d="M70 36 L50 25 L31 36 L31 50 L50 50 L69 50 L69 64 L50 75 L36 67" stroke="url(#ea-b)" />
-          </g>
+          <image href="/brand/simbolo.png" x="186" y="106" width="28" height="32" />
           <rect x="160" y="152" width="80" height="5" rx="2.5" fill="#fff" opacity=".7" />
           <rect x="176" y="161" width="48" height="4" rx="2" fill="#fff" opacity=".35" />
           <path d="M112 182 H288 L298 194 H102 Z" fill="url(#ea-base)" />
@@ -77,15 +64,8 @@ export function EntregaAnimada() {
           ))}
         </g>
         {/* marca na caixa */}
-        <g transform="translate(116 222) scale(.42)" fill="none" strokeWidth="11" strokeLinejoin="round">
-          <path d="M74 22 L50 8 L13 29 L13 71 L26 78.5" stroke="url(#ea-a)" />
-          <path d="M26 78 L50 92 L87 71 L87 29 L80 25" stroke="url(#ea-b)" />
-          <path d="M70 36 L50 25 L31 36 L31 50 L50 50 L69 50 L69 64 L50 75 L36 67" stroke="url(#ea-b)" />
-        </g>
-        <text x="160" y="246" fill="#fff" fontFamily="var(--font-exo), sans-serif" fontWeight="800" fontSize="15">
-          ERCA <tspan fill="#2EC4E6" fontStyle="italic">LOC</tspan>
-        </text>
-        <text x="160" y="259" fill="#7fd6ef" fontFamily="var(--font-inter), sans-serif" fontSize="6.5" letterSpacing="1.6">
+        <image href="/brand/logo-ercaloc.webp" x="116" y="222" width="132" height="38" />
+        <text x="121" y="273" fill="#7fd6ef" fontFamily="var(--font-inter), sans-serif" fontSize="6.5" letterSpacing="1.6">
           LOCAÇÃO DE TECNOLOGIA
         </text>
       </svg>

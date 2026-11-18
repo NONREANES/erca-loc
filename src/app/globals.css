@@ -75,32 +75,57 @@ html.intro-vista .splash {
     stroke-dashoffset: 0;
   }
 }
-.splash-simbolo {
-  animation: sumir 0.6s ease 1.25s forwards;
-}
-.splash-logo {
+.simbolo-entrada {
   opacity: 0;
-  transform: scale(0.9);
-  filter: blur(6px);
-  animation: surgir 0.9s var(--ease-out-expo) 1.3s forwards;
+  transform: scale(0.4) rotate(-120deg);
+  filter: blur(8px);
+  animation: entrar 1s var(--ease-out-expo) 0.15s forwards;
 }
-@keyframes sumir {
-  to {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-}
-@keyframes surgir {
+@keyframes entrar {
   to {
     opacity: 1;
     transform: none;
     filter: none;
   }
 }
+.splash-simbolo {
+  animation:
+    entrar 1s var(--ease-out-expo) 0.15s forwards,
+    deslizar 0.8s var(--ease-out-expo) 1.25s forwards,
+    sumir 0.3s ease 2.4s forwards;
+}
+.splash-logo {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  animation: revelar-logo 0.9s var(--ease-out-expo) 1.65s forwards;
+}
+@keyframes deslizar {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateX(-151.6%);
+  }
+}
+@keyframes sumir {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes revelar-logo {
+  from {
+    opacity: 1;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
 .splash-tag {
   opacity: 0;
   letter-spacing: 0.6em;
-  animation: tag 1.2s var(--ease-out-expo) 1.7s forwards;
+  animation: tag 1.2s var(--ease-out-expo) 2.1s forwards;
 }
 .splash-barra {
   transform-origin: left;
@@ -274,6 +299,7 @@ html.intro-vista .splash {
     scroll-behavior: auto;
   }
   .logo-draw path,
+  .simbolo-entrada,
   .splash-simbolo,
   .splash-logo,
   .splash-tag,
